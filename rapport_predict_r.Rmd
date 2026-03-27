@@ -1,0 +1,59 @@
+---
+title: "exploration predict-R simulé"
+author: "Alexis TEXIER"
+date: "2026-03-12"
+output: html_document 
+---
+
+##Introduction 
+
+Ce rapport explore un jeu de données simulé de 30 patients, 
+inspiré du protocole Predict-R (dépistage du risque de MRC en soins primaires). 
+
+``` {r setup, include=FALSE}
+library(tidyverse)
+donnees <- read_csv("predict_r_sim.csv")
+```
+
+## Description de l'échantillon 
+
+```{r}
+glimpse(donnees)
+```
+
+### Effectifs par niveau de risque 
+
+```{r}
+donnees |> count(risque_pr)
+```
+
+### DFG moyen par sexe 
+
+```{r}
+donnees |> 
+  group_by(sexe) |>
+  summarise(
+    n = n(), 
+    dfg_moyen = mean(dfg),
+    age_moyen = mean(age)
+  )
+```
+
+## Graphiques
+
+### Distribution du DFG par niveau de risque 
+```{r}
+ggplot(donnees, aes(x = risque_pr, y = dfg, fill = risque_pr)) +
+  geom_boxplot() + 
+  scale_fill_manual(values = c("green" = "green3" , "orange" = "orange", "red" = "red3")) + 
+  theme_minimal() + 
+  labs(title = "DFG par niveau de risque Predict-R",
+       x = "Niveau de risque",
+       y = "DFG estimé (mL/min/1,73m²)",
+       fill = "Risque")
+```
+
+## Conclusion 
+
+Les patients classés "red" ont un DFG plus bas que les autres groupes. 
+L'autoquestionnaire semble disriminer correctement les niveaux de risque.

@@ -1,0 +1,92 @@
+---
+title: "Espérance de vie par département en France"
+author: "Le boss"
+date: "2026-03-12"
+output: html_document
+---
+
+## Espérance de vie par département en France 
+
+Ce Rmd est l'exercice finale de validation de la phase 1.
+Je ne dois utiliser que le mode d'emploi que j'ai créé avec CLAUDE sur Nimbalyst. 
+
+```{r setup, include = FALSE}
+library(tidyverse)
+esperance <- read_csv("esperance-de-vie-par-departements.csv")
+```
+
+## Epreuve 1 : Nettoyage 
+
+```{r}
+esperance <- esperance |>
+  rename(departement = 1, esp = 2)
+esperance <- esperance |>
+  separate(departement, into = c("region", "departement"), sep = " - ")
+esperance <- esperance |>
+  mutate(region = str_trim(region), departement = str_trim(departement))
+```
+
+## Epreuve 2 : Statistiques descriptives 
+
+### Nombre de départements 
+
+```{r}
+length(esperance$departement)
+```
+
+### Espérance de vie moyenne nationale
+
+```{r}
+mean(esperance$esp)
+```
+
+### Départements avec l'espérance de vie la plus haute et la plus basse 
+
+```{r}
+esperance |> slice_max(esp, n = 1) 
+esperance |> slice_min(esp, n = 1)
+```
+
+## Epreuve 3 :  Distribution de l'espérance de vie par département 
+
+```{r}
+ggplot(esperance, aes(x = esp)) +
+  geom_histogram(bins = 10, fill = "steelblue", color = "white") +
+  labs (title = "Distribution de l'espérance de vie",
+        x = "Esperance de vie (annees)",
+        y = "Nombre de départements") +
+  theme_minimal()
+```
+
+## Epreuve 4 : Analyse par région 
+
+``` {r}
+esperance |>
+  group_by(region) |>
+  summarise(
+    n = n(),
+    esp_moyenne = mean(esp))
+```
+
+
+### TOP et FLOP 5 espérance de vie 
+
+```{r}
+esperance |>
+  group_by(region) |>
+  summarise(esp_moyenne = mean(esp)) |>
+  slice_max(esp_moyenne, n = 5) |>
+  slice_min(esp_moyenne, n = 5)
+
+
+esperance |>
+  group_by(region) |>
+  summarise(esp_moyenne = mean(esp)) |>
+  slice_min(esp_moyenne, n = 5)
+```
+
+
+
+## CONCLUSION 
+L'espérance de vie moyenne est aux alentours de 80 ans, avec une variation semblant importante dans ce rapport.
+Il serait intéressé d'étudié la significativité statisque différentielle de l'espérance de vie entre les différents départements pour en savoir un peu plus. 

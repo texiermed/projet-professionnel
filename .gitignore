@@ -1,0 +1,10 @@
+# Historique R
+.Rhistory
+.RData
+.Rproj.user
+
+# Fichiers HTML générés (on garde les .Rmd sources)
+*.html
+
+# Config éditeur
+.claude/

@@ -1,0 +1,183 @@
+# Progression — Formation Santé Publique
+
+## Niveau actuel
+- R : Phase 2 terminée, livret complet 2662 lignes (gtsummary + tests stats + ggplot2 avancé + R Markdown avancé + régression logistique + toutes analyses Predict-R + analyse de sensibilité)
+- Épidémiologie : notions solides (tests stats, Se/Sp/VPP/VPN, régression logistique, Kappa, IC, p-value)
+- SQL : aucun
+- Git : aucun
+- Programmation générale : aucune expérience préalable
+- Excel : basique
+
+## Profil apprenant
+- Pédagogie : guidé pas à pas au début, problèmes à résoudre quand plus à l'aise
+- Langue : mixte FR/EN (prépare anglais SpFrance)
+- Contrainte : burn-out sévère, rythme variable, sessions courtes (30-45 min max)
+- Données Predict-R : disponibles après recueil mai 2026
+- En attendant : données simulées ou données ouvertes françaises (Géodes, data.gouv)
+
+## Sessions réalisées
+- 2026-03-11 : Session 1 — Installation R + RStudio + premiers pas
+  - R 4.5.2 installé, RStudio fonctionnel
+  - Opérations arithmétiques, `sqrt()`
+  - Strings et erreur guillemets (case-sensitive compris)
+  - Variables (`<-`), vecteurs (`c()`)
+  - Fonctions : `mean()`, `median()`, `length()`, `summary()`
+  - Filtrage logique : `dfg < 60`, `sum()`, `mean()` sur logiques
+  - Lien avec Predict-R : proportion = CJP
+  - Scripts : premier script `01_premiers_pas.R`, encodage UTF-8 configuré
+  - Tidyverse installé et chargé (`library(tidyverse)`)
+  - Data frames : `data.frame()`, `$`, `glimpse()`
+  - dplyr : `filter()`, `select()`, `arrange()`, `mutate()`, `count()`
+  - Pipe `|>` : enchaîner les opérations
+  - `group_by() |> summarise()` : statistiques par groupe (n, mean)
+  - `case_when()` : créer des catégories (stades MRC à partir du DFG)
+  - Tableau croisé : `count(risque_pr, sexe)`
+  - Bonne vitesse d'apprentissage, comprend les concepts et lit les résultats cliniquement
+
+  - Stocker un résultat : `patients <- patients |> mutate(...)`
+  - ggplot2 : histogramme, barplot, boxplot, scatter plot
+  - `aes()`, `fill` vs `color`, `scale_fill_manual()`, `scale_color_manual()`
+  - `labs()` pour titres/axes, `theme_minimal()`
+  - Boxplot âge par sexe réalisé en autonomie (sans aide)
+  - Erreurs corrigées : typo `scale_file_manual`, guillemet manquant, `fill` vs `color` dans labs
+- 2026-03-11 : Session 2 — CSV + facet_wrap + exercices autonomes
+  - Créer et sauvegarder un CSV : `write.csv()`, `set.seed()`, `sample()`, `rnorm()`
+  - Charger un CSV : `read_csv()` (workflow réel pour Predict-R)
+  - Exercice semi-autonome réussi : count, group_by+summarise, boxplot sur 30 patients
+  - `facet_wrap(~ variable)` : sous-panneaux par groupe
+  - Barplot croisé sexe × risque avec facet
+  - Erreur de parenthèse `))` vs `)` corrigée (classique ggplot)
+  - Comprend la différence script vs console (quand utiliser chaque)
+  - Autonomie croissante : construit des graphiques seul avec le mémo
+
+- 2026-03-12 : Session 3 — R Markdown + données manquantes
+  - Test de rétention réussi : relancé script session 1, tout compris sans aide
+  - Répertoire de travail : `getwd()`, `setwd()`, `list.files()`, `/` vs `\`
+  - R Markdown : structure `.Rmd`, en-tête YAML, blocs `{r}`, `include=FALSE`, Knit → HTML
+  - Premier rapport `rapport_predict_r.Rmd` écrit à la main et fonctionnel
+  - Résolution autonome : CSV introuvable → changé working directory + recréé le fichier sans aide
+  - Données manquantes : `NA`, `na.rm = TRUE`, `is.na()`, `sum(is.na())`
+  - Différence `summary()` vs `summarise()`
+  - Erreur `groupe_by` (français) corrigée → `group_by` (anglais)
+  - Erreur `rm.na` inversé → `na.rm`
+  - Autonomie en hausse : débugue seul, pose des questions de fond
+
+- 2026-03-12 : Session 4 — Données réelles + nettoyage + analyse par région
+  - Dataset réel : espérance de vie par département (data.gouv.fr, 98 obs)
+  - `rename()` par position (`= 1`, `= 2`) — contourner les noms avec accents/espaces
+  - `names()` pour voir les noms exacts des colonnes
+  - `separate()` : séparer "Région - Département" en 2 colonnes
+  - `str_trim()` : nettoyer les espaces en trop après séparation
+  - `arrange(desc())` : tri décroissant
+  - `slice_min()` / `slice_max()` : trouver les extrêmes directement
+  - `drop_na()` / `replace_na()` : gestion avancée des NA
+  - Histogramme couleur fixe (`fill` dans `geom_*`, pas dans `aes`) — compris après plusieurs erreurs
+  - Pipeline complet : `read_csv()` → `rename()` → `separate()` → `str_trim()` → `group_by()` → `summarise()` → `arrange(desc())`
+  - Résultat : classement des régions par espérance de vie moyenne (Martinique #1, 83 ans)
+  - Beaucoup d'erreurs de syntaxe mais persistance remarquable — corrige sans regarder la solution
+  - Distinction couleur fixe vs couleur par variable : acquise
+
+- 2026-03-12 : Session 5 — Exercice de synthèse Phase 1 (VALIDÉ)
+  - Rapport R Markdown complet écrit quasi seul : `Rapport d'évaluation finale.Rmd`
+  - Pipeline complet : setup → nettoyage (rename, separate, str_trim) → stats descriptives → histogramme → analyse par région → top/flop 5 → conclusion
+  - Utilisation autonome du mémo comme seule référence
+  - Erreurs résiduelles de syntaxe (virgule oubliée, `.csv` manquant, `setwd` sans guillemets) mais toutes corrigées seul
+  - Seul blocage nécessitant aide : enchaîner `summarise() |> slice_max()` (nom de colonne après summarise)
+  - **PHASE 1 TERMINÉE**
+
+- 2026-03-13 → 2026-03-22 : Pause 1 semaine (vacances, EMDR, sport, amis)
+  - Psychiatre + EMDR en parallèle
+  - Ruminations/anxiété présentes mais gérées
+
+- 2026-03-23 : Session 6 — Phase 2 début (gtsummary + tests stats)
+  - `gtsummary` installé et maîtrisé : `tbl_summary()`, `by =`, `add_p()`, `add_overall()`
+  - Personnalisation : `statistic` (mean/SD vs median/IQR), `label` (noms propres)
+  - Comprend les tests choisis automatiquement : Kruskal-Wallis, Fisher exact, et pourquoi
+  - Tableau 1 publication-ready en 2 lignes de code
+  - Touches clavier AZERTY maîtrisées : `{` = AltGr+4, `|` = AltGr+6, `` ` `` = AltGr+7
+  - Tests statistiques : t-test, Wilcoxon, Chi2, Fisher, Kruskal-Wallis — tous lancés et compris
+  - Comprend quand choisir paramétrique vs non paramétrique et pourquoi
+  - Comprend la lecture des résultats (p-value, IC, rangs vs moyennes)
+  - CLAUDE.md mis à jour avec toutes les analyses Predict-R (CJP, Kappa, Se/Sp, sous-groupes)
+
+- 2026-03-24 : Session 7 — ggplot2 avancé
+  - Violin plot : `geom_violin()` + `geom_boxplot()` superposés, lecture de la forme
+  - Density plot : `geom_density(alpha = 0.5)`, superposition de groupes, concept de densité
+  - Barplot proportionnel : `position = "fill"` + `scales::percent`
+  - `scale_fill_manual()` : couleurs personnalisées (vert/orange/rouge Predict-R)
+  - Facettes : `facet_wrap(~ var)` et `facet_grid(lignes ~ colonnes)`
+  - Thèmes : `theme_classic()`, `theme_bw()`, `theme_light()`, `theme_void()` — tous testés
+  - Personnalisation : `element_text(size, face)`, `legend.position = "none"`
+  - `alpha` (transparence), `width` (largeur boxplot)
+  - Comprend quand utiliser chaque type de graphique
+  - **Bloc ggplot2 avancé Phase 2 : TERMINÉ**
+  - R Markdown avancé : en-tête YAML (toc, toc_float, number_sections, theme)
+  - Chunks : `include=FALSE`, `echo=FALSE`, `message=FALSE`, `warning=FALSE`, `fig.width/fig.height`
+  - `knitr::opts_chunk$set()` : options globales pour cacher code/messages dans le rapport final
+  - Rapport complet kniité : table des matières flottante + gtsummary + violin plot
+  - **Bloc R Markdown avancé Phase 2 : TERMINÉ**
+  - Régression logistique : `glm(family = binomial)`, `summary()`, coefficients, p-values
+  - `ifelse()` pour créer une variable binaire Y
+  - `finalfit()` : tableau publication-ready avec OR univariable + multivariable + IC 95%
+  - `or_plot()` : forest plot des OR
+  - Comprend : OR, IC 95%, logit, odds, univariable vs multivariable, facteurs de confusion
+  - Comprend les maths : logit(p) = β₀ + β₁×X, OR = e^β
+  - `factor()` vs numérique : quand et pourquoi convertir
+  - **Bloc régression logistique Phase 2 : TERMINÉ**
+
+- 2026-03-25 : Session 8 — Analyses Predict-R (simulation complète)
+  - CJP : proportion rattrapée + IC Wilson (`prop.test(correct = FALSE)`) + test binomial unilatéral (`binom.test`)
+  - Comprend : H₀/H₁, unilatéral vs bilatéral, pourquoi binomial, IC Wilson vs Wald
+  - Découverte du p-hacking par expérimentation → compris pourquoi c'est de la fraude
+  - Kappa de Cohen : `irr::kappa2()`, concordance inter-évaluateurs, échelle Landis & Koch
+  - Se, Sp, VPP, VPN : `epiR::epi.tests()`, tableau 2×2, réordonnancement `tab[c(2,1), c(2,1)]`
+  - Comprend : gold standard, VPP dépend de la prévalence, Se/Sp intrinsèques au test
+  - Taux de participation/complétion : proportions simples + IC Wilson
+  - Satisfaction Likert : `tbl_summary(type = list(everything() ~ "continuous"))`, médiane (Q1, Q3)
+  - Comprend : ordinal vs continu, pourquoi pas la moyenne pour du Likert
+  - Analyses en sous-groupes : `tbl_summary(by = mrc_connue)`, `tbl_summary(by = tranche_age)`
+  - `case_when()` + `factor(levels = ...)` pour créer et ordonner les tranches d'âge
+  - Fisher qui plante avec gros tableaux → solution : `type = list(var ~ "continuous")`
+  - Description d'un Tableau 1 : p globale + illustration groupes extrêmes
+  - Chi2 de tendance (Cochran-Armitage) : `prop.trend.test()`, comparaison avec Chi2 classique
+  - Comprend : df = 1 vs df = k-1, pourquoi l'ordre des catégories est crucial
+  - Memo_R.md entièrement restructuré en "Livret R" avec sommaire, 3 parties, annexes, cours stats
+  - **PHASE 2 — ANALYSES PREDICT-R : TERMINÉE**
+  - **PHASE 2 COMPLÈTE**
+
+- 2026-03-25 : Session 9 — Enrichissement livret R
+  - Intégration des sections : Jointures (left_join, inner_join, full_join), Dates (lubridate), Import Excel (readxl, janitor, pivot)
+  - Ajout normalité (Shapiro-Wilk, QQ-plot), comparaisons multiples (Bonferroni, BH), OR vs RR
+  - Ajout vérification modèle logistique (VIF, courbe ROC/AUC)
+  - Annexe F : Glossaire épidémiologique complet (mesures, biais, Bradford Hill, STROBE/STARD)
+  - Annexe G : Bases mathématiques (loi normale, variance/SD, TCL, degrés de liberté, IC, puissance)
+  - Livret R = 21 sections + 7 annexes, ~1840 lignes
+  - PDF régénéré (Livret_R.pdf)
+  - **Livret complet et autonome pour Phase 3**
+
+- 2026-03-26 : Session 11 — Corrections finales livret + réorganisation plan
+  - 12 corrections appliquées au livret (write_csv, TCL, IC Kappa, analyse de sensibilité, Quarto, tabyl, vocabulaire ARS, messages d'erreur)
+  - Relecture par agent professeur : note 9/10
+  - Section "Messages d'erreur fréquents" ajoutée (recommandation prof)
+  - Vocabulaire ARS complet ajouté au glossaire (HCSP, MDO, signalement, cas index, taux d'attaque)
+  - Analyse de sensibilité : nouvelle sous-section Predict-R avec 3 exemples
+  - Plan de formation réorganisé en 8 checkpoints (technique + réseau obligatoire)
+  - Livret R = 2662 lignes, 32 sections + 7 annexes enrichies
+  - **Phase 2 terminée. Prochain : Checkpoint 1 (Git + contact Sicre-Gatimel)**
+
+## Prochain checkpoint
+**Checkpoint 1 — Git + GitHub + mail Dr Sicre-Gatimel** (voir CLAUDE.md)
+
+## Points forts identifiés
+- Formation médicale solide (raisonnement, rigueur, lecture d'articles)
+- Thèse méthodologique en cours (Predict-R) — ancrage concret
+- Intérêt pour l'éthique et la réflexion (positionnement différenciant)
+- Motivé par un projet de carrière clair
+- R acquis rapidement (Phase 1+2 en 11 sessions, partant de zéro)
+- Livret R de haute qualité comme outil de révision
+
+## Points à travailler
+- Réseau SP non encore activé (priorité n°1)
+- Git/GitHub : aucune expérience (checkpoint 1)
+- Culture SP institutionnelle : à renforcer (checkpoint 3)
+- Gestion de l'énergie (adapter le rythme aux symptômes)

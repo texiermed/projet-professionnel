@@ -1,0 +1,61 @@
+---
+title: "Rapport avancé"
+author: "Alexis Texier"
+date: "2026-03-24"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    number_section: true
+    theme: cosmo
+---
+## Introduction 
+
+Ce rapport présente l'analyse des données simulées Predict-R. 
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(gtsummary)
+patients <- read_csv("C:/Users/Alexis/Documents/projet-professionnel/predict_r_sim.csv")
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+## Données 
+
+```{r}
+glimpse(patients)
+```
+
+## Résultats 
+
+### Tableau descriptif
+
+```{r}
+patients |> 
+  select(age, sexe, dfg, risque_pr)|>
+  tbl_summary(by = risque_pr) |>
+  add_p() |>
+  add_overall()
+```
+
+### Distribution de l'âge
+
+``` {r}
+ggplot(patients, aes(x = risque_pr, y = age, fill = risque_pr)) +
+  geom_violin() +
+  geom_boxplot(width = 0.2, fill = "white") + 
+  scale_fill_manual(values = c("green" = "green3", "orange" = "orange", "red" = "red2")) +
+  labs (
+    title = "Distribution de l'âge par niveau de risque",
+    x = "Risque Predict-R", 
+    y = "Age") +
+  theme_classic() +
+  theme(legend.position = "none")
+```
+
+## Conclusion
+
+Les patients a risque élevé sont plus agés et ont un DFG plus bas. 
+
+
+
