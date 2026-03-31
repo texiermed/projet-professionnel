@@ -116,9 +116,9 @@ Objectif : savoir produire les analyses de la thèse Predict-R et d'une étude �
 **Technique :**
 - [ ] Learn Git Branching — tutoriel interactif (learngitbranching.js.org, ~2h)
 - [ ] Initialiser un repo Git dans le projet professionnel
+- [ ] Enrichir la section Git du livret avec l'expérience acquise
 - [ ] Créer un compte GitHub
 - [ ] Pousser les scripts R et le livret sur GitHub
-- [ ] Enrichir la section Git du livret avec l'expérience acquise
 
 **Réseau OBLIGATOIRE :**
 - [ ] Créer un **profil LinkedIn** orienté SP (si pas déjà fait)
@@ -308,21 +308,21 @@ Objectif : savoir produire les analyses de la thèse Predict-R et d'une étude �
 
 ## Liens utiles
 
-- https://cloud.r-project.org/R : https://cloud.r-project.org/
+- https://cloud.r-project.org/https://cloud.r-project.org/R : https://cloud.r-project.org/
 - https://posit.co/download/rstudio-desktop/RStudio : https://posit.co/download/rstudio-desktop/
-- https://r4ds.hadley.nzR for Data Science : https://r4ds.hadley.nz
-- https://epirhandbook.com/en/Epi R Handbook : https://epirhandbook.com/en/
-- https://geodes.santepubliquefrance.fr/Géodes : https://geodes.santepubliquefrance.fr/
-- https://www.data.gouv.fr/pages/donnees_santedata.gouv.fr santé : https://www.data.gouv.fr/pages/donnees_sante
-- https://r-graph-gallery.comR Graph Gallery : https://r-graph-gallery.com
+- https://r4ds.hadley.nzhttps://r4ds.hadley.nzR for Data Science : https://r4ds.hadley.nz
+- https://epirhandbook.com/en/https://epirhandbook.com/en/Epi R Handbook : https://epirhandbook.com/en/
+- https://geodes.santepubliquefrance.fr/https://geodes.santepubliquefrance.fr/Géodes : https://geodes.santepubliquefrance.fr/
+- https://www.data.gouv.fr/pages/donnees_santehttps://www.data.gouv.fr/pages/donnees_santedata.gouv.fr santé : https://www.data.gouv.fr/pages/donnees_sante
+- https://r-graph-gallery.comhttps://r-graph-gallery.comR Graph Gallery : https://r-graph-gallery.com
 - https://shiny.posit.co/r/getstarted/Shiny : https://shiny.posit.co/r/getstarted/
-- https://openwho.org/OpenWHO : https://openwho.org/
+- https://openwho.org/https://openwho.org/OpenWHO : https://openwho.org/
 - https://www.ccne-ethique.fr/CCNE : https://www.ccne-ethique.fr/
-- https://www.ere-occitanie.org/ERE Occitanie : https://www.ere-occitanie.org/
-- https://ars-occitanie-recrute.talent-soft.comARS Occitanie recrutement : https://ars-occitanie-recrute.talent-soft.com
-- https://place-emploi-public.gouv.frPlace de l'emploi public : https://place-emploi-public.gouv.fr
-- https://www.santepubliquefrance.fr/offres-d-emploiSpFrance offres : https://www.santepubliquefrance.fr/offres-d-emploi
-- https://formation-continue.ehesp.fr/EHESP formation continue : https://formation-continue.ehesp.fr/
-- https://www.isped.u-bordeaux.fr/ISPED Bordeaux : https://www.isped.u-bordeaux.fr/
-- https://sqlbolt.comSQLBolt : https://sqlbolt.com
-- https://learngitbranching.js.orgLearn Git Branching : https://learngitbranching.js.org
+- https://www.ere-occitanie.org/https://www.ere-occitanie.org/ERE Occitanie : https://www.ere-occitanie.org/
+- https://ars-occitanie-recrute.talent-soft.comhttps://ars-occitanie-recrute.talent-soft.comARS Occitanie recrutement : https://ars-occitanie-recrute.talent-soft.com
+- https://place-emploi-public.gouv.frhttps://place-emploi-public.gouv.frPlace de l'emploi public : https://place-emploi-public.gouv.fr
+- https://www.santepubliquefrance.fr/offres-d-emploihttps://www.santepubliquefrance.fr/offres-d-emploiSpFrance offres : https://www.santepubliquefrance.fr/offres-d-emploi
+- https://formation-continue.ehesp.fr/https://formation-continue.ehesp.fr/EHESP formation continue : https://formation-continue.ehesp.fr/
+- https://www.isped.u-bordeaux.fr/https://www.isped.u-bordeaux.fr/ISPED Bordeaux : https://www.isped.u-bordeaux.fr/
+- https://sqlbolt.comhttps://sqlbolt.comSQLBolt : https://sqlbolt.com
+- https://learngitbranching.js.orghttps://learngitbranching.js.orgLearn Git Branching : https://learngitbranching.js.org

@@ -6,5 +6,10 @@
 # Fichiers HTML générés (on garde les .Rmd sources)
 *.html
 
+# Photos perso (LinkedIn, etc.)
+*.jpeg
+*.jpg
+*.png
+
 # Config éditeur
 .claude/

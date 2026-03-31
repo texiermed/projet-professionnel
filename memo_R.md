@@ -474,7 +474,7 @@ mon-projet/
   output/                 # résultats (tableaux, figures, rapports)
 ```
 
-**Utiliser `here::here()` pour les chemins :**
+**Utiliser ****`here::here()`**** pour les chemins :**
 ```r
 # install.packages("here")
 library(here)
@@ -726,18 +726,20 @@ output:
 ### Blocs de code (chunks)
 Un **chunk** = un bloc de code R dans le .Rmd, délimité par trois backticks. Raccourci pour en insérer un : **Ctrl + Alt + I**.
 
-    ```{r}
+```
+{r}
     mean(donnees$dfg, na.rm = TRUE)
-    ```
+```
 
 ### Bloc setup — charger packages et données (invisible)
 
-    ```{r setup, include=FALSE}
+```
+{r setup, include=FALSE}
     library(tidyverse)
     library(gtsummary)
     patients <- read_csv("predict_r_sim.csv")
     knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
-    ```
+```
 
 > C'est la ligne "magique" qui configure tous les chunks d'un coup. Copie-la telle quelle. `knitr` = le package qui "tricote", `opts_chunk` = les options des blocs, `$set()` = définir ces options.
 
@@ -769,12 +771,13 @@ Un **chunk** = un bloc de code R dans le .Rmd, délimité par trois backticks. R
 
 ### Exemple de rapport complet
 
-    ```{r setup, include=FALSE}
+```
+{r setup, include=FALSE}
     library(tidyverse)
     library(gtsummary)
     patients <- read_csv("C:/chemin/predict_r_sim.csv")
     knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
-    ```
+```
 
     ## Introduction
     Ce rapport presente l'analyse des donnees simulees Predict-R.
@@ -782,21 +785,23 @@ Un **chunk** = un bloc de code R dans le .Rmd, délimité par trois backticks. R
     ## Resultats
 
     ### Tableau descriptif
-    ```{r}
+```
+{r}
     patients |>
       select(age, sexe, dfg, risque_pr) |>
       tbl_summary(by = risque_pr) |>
       add_p() |>
       add_overall()
-    ```
+```
 
     ### Distribution de l'age
-    ```{r, fig.width=8, fig.height=5}
+```
+{r, fig.width=8, fig.height=5}
     ggplot(patients, aes(x = risque_pr, y = age, fill = risque_pr)) +
       geom_violin() +
       geom_boxplot(width = 0.2, fill = "white") +
       theme_classic()
-    ```
+```
 
     ## Conclusion
     Les patients a risque eleve sont plus ages.
@@ -813,7 +818,7 @@ En santé publique, tu croiseras toujours plusieurs tables : patients + résulta
 ### Les 3 jointures essentielles
 
 | Jointure | Ce qu'elle garde |
-|----------|-----------------|
+| --- | --- |
 | `left_join(x, y)` | Toutes les lignes de x + colonnes de y quand ça correspond |
 | `inner_join(x, y)` | Seulement les lignes présentes dans les DEUX tables |
 | `full_join(x, y)` | Tout, des deux côtés (NA si pas de correspondance) |
@@ -946,14 +951,14 @@ donnees <- donnees |> clean_names()
 Les données de surveillance arrivent souvent en format **large** (une colonne par semaine) :
 
 | commune | sem_01 | sem_02 | sem_03 |
-|---------|--------|--------|--------|
+| --- | --- | --- | --- |
 | Toulouse | 5 | 8 | 3 |
 | Foix | 1 | 2 | 0 |
 
 Pour ggplot2, tu as besoin du format **long** (une ligne par observation) :
 
 | commune | semaine | cas |
-|---------|---------|-----|
+| --- | --- | --- |
 | Toulouse | sem_01 | 5 |
 | Toulouse | sem_02 | 8 |
 | ... | ... | ... |
@@ -1099,12 +1104,12 @@ communes <- communes |>
 Les regex sont des motifs de recherche dans du texte. Tu n'as pas besoin de tout retenir — ce tableau suffit :
 
 | Regex | Signification | Exemple |
-|-------|--------------|---------|
+| --- | --- | --- |
 | `.` | N'importe quel caractère | `"a.c"` trouve "abc", "a1c" |
 | `^` | Commence par | `"^E"` trouve "E11" mais pas "AE" |
 | `$` | Finit par | `"9$"` trouve "E11.9" |
-| `\\d` | Un chiffre | `"\\d{2}"` = exactement 2 chiffres |
-| `[A-Z]` | Une lettre majuscule | `"[A-Z]\\d{2}"` = "E11" |
+| `\d` | Un chiffre | `"\d{2}"` = exactement 2 chiffres |
+| `[A-Z]` | Une lettre majuscule | `"[A-Z]\d{2}"` = "E11" |
 | `*` | 0 ou plus | `"ab*c"` trouve "ac", "abc", "abbc" |
 
 > En R, les `\` doivent être doublés : `\d` en regex s'écrit `"\\d"` en R.
@@ -1430,8 +1435,8 @@ Dans la thèse Predict-R : préciser que les analyses en sous-groupes sont **exp
 
 ### OR vs Risque Relatif (RR)
 
-| | **OR** | **RR** |
-|---|---|---|
+|  | **OR** | **RR** |
+| --- | --- | --- |
 | Formule | odds exposés / odds non-exposés | risque exposés / risque non-exposés |
 | Quand | Cas-témoins, régression logistique | Cohorte, essais |
 | Interprétation | Approxime le RR si événement rare (< 10%) | Directement interprétable |
@@ -2058,7 +2063,7 @@ Git enregistre l'historique de tes fichiers. Tu peux revenir en arrière, travai
 
 ### Vocabulaire
 | Terme | Signification |
-|-------|--------------|
+| --- | --- |
 | **Repository (repo)** | Un dossier suivi par Git |
 | **Commit** | Un point de sauvegarde (comme une photo de ton code à un instant) |
 | **Branch** | Une version parallèle (pour tester sans casser le code principal) |
@@ -2113,7 +2118,7 @@ SQL = le langage pour interroger des bases de données. Les concepts sont les m�
 ### Équivalences dplyr ↔ SQL
 
 | dplyr | SQL | Ce que ça fait |
-|-------|-----|---------------|
+| --- | --- | --- |
 | `filter()` | `WHERE` | Filtrer les lignes |
 | `select()` | `SELECT` | Choisir les colonnes |
 | `arrange()` | `ORDER BY` | Trier |
@@ -2324,7 +2329,7 @@ donnees <- donnees |> mutate(...)         # 9. Créer les variables dérivées
 - **Stocker** : `patients <- patients |> mutate(...)` sinon le résultat est juste affiché
 - **Aérer** : retour à la ligne après `+` et `,`
 - **Parenthèses** : `ggplot(données, aes(...))` → 2 parenthèses fermantes avant le `+`
-- **Chemins** : toujours `/` (slash) jamais `\` (backslash), toujours entre guillemets
+- **Chemins** : toujours `/` (slash) jamais `` (backslash), toujours entre guillemets
 - **NA** : toujours vérifier et rapporter les données manquantes
 - **R Markdown** : un fichier = texte + code + résultats, tout reproductible
 - **Protéger ses données** : quand on transforme, utiliser des noms sémantiques (`donnees_brutes`, `donnees_nettoyees`, `donnees_analyse`) — éviter `donnees2`, `donnees3` qui deviennent vite incompréhensibles
@@ -2457,7 +2462,7 @@ Pour les entretiens ARS / Santé Publique France.
 ### Mesures de fréquence
 
 | Terme | Définition | Exemple |
-|-------|-----------|---------|
+| --- | --- | --- |
 | **Prévalence** | Proportion de malades à un instant donné ("photo") | 5% de la population a du diabète aujourd'hui |
 | **Incidence** | Nombre de **nouveaux** cas sur une période ("film") | 200 nouveaux cas de grippe cette semaine |
 | **Taux d'incidence** | Incidence / population à risque / temps | 3.5 pour 100 000 personnes-années |
@@ -2467,7 +2472,7 @@ Pour les entretiens ARS / Santé Publique France.
 ### Mesures d'association
 
 | Terme | Définition | Étude |
-|-------|-----------|-------|
+| --- | --- | --- |
 | **Risque Relatif (RR)** | Risque exposés / risque non-exposés | Cohorte, essais |
 | **Odds Ratio (OR)** | Odds exposés / odds non-exposés | Cas-témoins, régression logistique |
 | **Risque Attribuable (RA)** | Risque exposés - risque non-exposés | Impact de l'exposition |
@@ -2484,7 +2489,7 @@ Pour les entretiens ARS / Santé Publique France.
 ### Les 3 grands biais
 
 | Biais | Définition | Exemple | Solution |
-|-------|-----------|---------|---------|
+| --- | --- | --- | --- |
 | **Sélection** | L'échantillon ne représente pas la population | Ne recruter qu'en consultation → manque les asymptomatiques | Recrutement exhaustif, randomisation |
 | **Classement** | Erreur de mesure de l'exposition ou de la maladie | Patient qui oublie son exposition (biais de mémorisation) | Mesures objectives, questionnaires validés |
 | **Confusion** | Un 3ème facteur influence l'exposition ET la maladie | Café associé au cancer du poumon → parce que les fumeurs boivent plus de café | Ajustement (régression), stratification |
@@ -2577,7 +2582,7 @@ Patients éligibles (N = ...)
 ### Vocabulaire des bases de données en santé (culture SP)
 
 | Sigle | Nom | Ce que c'est |
-|-------|-----|-------------|
+| --- | --- | --- |
 | **SNDS** | Système National des Données de Santé | Méga-base : SNIIRAM + PMSI + causes de décès. Couvre toute la France |
 | **SNIIRAM** | Données de remboursement (Assurance Maladie) | Consultations, médicaments, actes |
 | **PMSI** | Programme de Médicalisation des Systèmes d'Information | Séjours hospitaliers, GHM, diagnostics |

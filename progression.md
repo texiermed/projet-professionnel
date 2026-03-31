@@ -4,7 +4,7 @@
 - R : Phase 2 terminée, livret complet 2662 lignes (gtsummary + tests stats + ggplot2 avancé + R Markdown avancé + régression logistique + toutes analyses Predict-R + analyse de sensibilité)
 - Épidémiologie : notions solides (tests stats, Se/Sp/VPP/VPN, régression logistique, Kappa, IC, p-value)
 - SQL : aucun
-- Git : aucun
+- Git : bases (init, add, commit, push, branche, remote, .gitignore)
 - Programmation générale : aucune expérience préalable
 - Excel : basique
 
@@ -165,8 +165,39 @@
   - Livret R = 2662 lignes, 32 sections + 7 annexes enrichies
   - **Phase 2 terminée. Prochain : Checkpoint 1 (Git + contact Sicre-Gatimel)**
 
+- 2026-03-27 : Session 12 — Checkpoint 1 : Git + GitHub
+  - Git installé (v2.53) et configuré (user.name, user.email)
+  - Concepts compris : repository, commit, branche, push, staging area
+  - Repo initialisé (`git init`), `.gitignore` créé
+  - Premier commit (15 fichiers, 4032 lignes)
+  - Compte GitHub connecté via token (classic)
+  - Repo poussé sur GitHub : github.com/texiermed/projet-professionnel
+  - README.md créé et poussé (vitrine professionnelle)
+  - Workflow maîtrisé : `git add` → `git commit -m "..."` → `git push`
+  - Branche renommée master → main
+  - Learn Git Branching : tutoriel complet (commit, branch, merge, rebase, HEAD, cherry-pick, reset/revert)
+  - Section Git du livret enrichie (~100 lignes, vocabulaire + workflow + erreurs)
+
+- 2026-03-31 : Session 13 — Checkpoint 1 : LinkedIn + Réseau ARS
+  - Profil LinkedIn créé et optimisé pour la santé publique
+  - Photo pro + badge #OpenToWork
+  - Titre : "Médecin généraliste | Réorientation santé publique | Analyse de données (R, Git) | Thèse Predict-R"
+  - Section "À propos" rédigée (fil narratif Predict-R + Ariège + SP)
+  - 3 expériences : Doctorant Predict-R, MG remplaçant, Terr-e Covid-19
+  - 9 compétences ajoutées (R, Biostatistiques, Git, Santé publique, Analyse des données...)
+  - GitHub lié dans les coordonnées
+  - Pages suivies : OMS, EHESP, Santé Publique France, ARS Occitanie, SFSP
+  - 2 mails envoyés : DD31 Toulouse + DD09 Ariège (demande d'échange avec un médecin ARS)
+  - **CHECKPOINT 1 VALIDÉ** (technique + réseau)
+
 ## Prochain checkpoint
-**Checkpoint 1 — Git + GitHub + mail Dr Sicre-Gatimel** (voir CLAUDE.md)
+**Checkpoint 2 — Premier projet données ouvertes :**
+- [ ] Télécharger un dataset Géodes (grippe saisonnière OU diabète par département)
+- [ ] Nettoyer, analyser, visualiser dans R
+- [ ] Produire un rapport R Markdown complet
+- [ ] Pousser le projet sur GitHub (premier projet visible)
+- [ ] Contacter 1 nouveau médecin ARS ou SP via LinkedIn
+- [ ] Relancer les contacts Checkpoint 1 si réponse reçue
 
 ## Points forts identifiés
 - Formation médicale solide (raisonnement, rigueur, lecture d'articles)
@@ -177,7 +208,7 @@
 - Livret R de haute qualité comme outil de révision
 
 ## Points à travailler
-- Réseau SP non encore activé (priorité n°1)
-- Git/GitHub : aucune expérience (checkpoint 1)
+- Réseau SP : premiers contacts pris (2 mails ARS envoyés, LinkedIn actif)
+- Git/GitHub : bases acquises, approfondir avec Learn Git Branching
 - Culture SP institutionnelle : à renforcer (checkpoint 3)
 - Gestion de l'énergie (adapter le rythme aux symptômes)
