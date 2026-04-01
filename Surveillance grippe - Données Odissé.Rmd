@@ -1,0 +1,107 @@
+---
+title: "Surveillance grippe - Données Odissé"
+author: "Alexis Texier"
+date: "2026-04-01"
+output: html_document
+toc: true
+toc_float: true
+number_sections: true
+theme: cosmo
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+library(tidyverse)
+library(gtsummary)
+grippe <- read_csv("grippe-passages-urgences-et-actes-sos-medecin_reg.csv")
+names(grippe) <- c("date_semaine", "semaine", "region_code", "region",
+                    "classe_age", "taux_urgences", "taux_hospit", "taux_sos")
+national <- grippe |>
+  filter(classe_age == "Tous âges") |>
+  mutate(date = as.Date(date_semaine))
+```
+
+# Introduction
+
+Ce rapport analyse les données de surveillance de la grippe saisonnière en France, issues de la plateforme **Odissé** (Santé Publique France). Les données couvrent la période 2020-2026 et incluent deux sources :
+
+- **Réseau OSCOUR** : passages aux urgences pour syndrome grippal (~700 structures, 96% des passages nationaux)
+- **SOS Médecins** : actes pour syndrome grippal (62 associations, 95% des actes nationaux)
+
+Les indicateurs sont exprimés en **taux pour 100 000 habitants**, par semaine, par région et par classe d'âge.
+
+```{r courbe-nationale}
+france <- national |>
+  group_by(date) |>
+  summarise(taux_urgences = mean(taux_urgences, na.rm = TRUE))
+
+france |>
+  ggplot(aes(x = date, y = taux_urgences)) +
+  geom_line(color = "steelblue") + 
+  labs(title = "Passages aux urgences pour grippe - Moyenne nationale",
+       x = "Date",
+       y = "Taux pour 100 000") + 
+  theme_classic()
+```
+
+# Comparaison régionale - Métropole
+
+```{r regions-métropole, fig.width=10, fig.height=6}
+national |>
+  filter(!region %in% c("Guadeloupe", "Martinique", "Mayotte","Guyane", "Réunion")) |>
+  ggplot(aes(x = date, y = taux_urgences, color =  region)) +
+  geom_line() + 
+  labs(title = "Passages aux urgences pour grippe par région - Métropole", 
+       x = "Date",
+       y = "Taux pour 100 000") + 
+  theme_classic() +
+  theme(legend.position = "bottom")
+```
+On observe un **rythme saisonnier commun** à toutes les régions métropolitaines, avec des pics hivernaux synchrones. L'absence de pic en 2020-2021 correspond aux mesures barrières liées au COVID-19.
+
+# Analyse par classe d'âge
+
+```{r age-occitanie, fig.width=10, fig.height=6}
+grippe |>
+  filter(region == "Occitanie", classe_age != "Tous âges")|>
+  mutate(date = as.Date(date_semaine)) |>
+  ggplot(aes(x = date, y = taux_urgences)) +
+  geom_line(color = "steelblue") +
+  facet_wrap(~classe_age, scales = "free_y") + 
+  labs (title = "Passages aux urgences pour grippe par âge - Occitanie",
+        x = "Date",
+        y = "Taux pour 100 000") +
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 6))
+```
+
+Les **00-04 ans** présentent les taux les plus élevés de passages aux urgences. Les **65 ans et plus** montrent une tendance à la hausse depuis 2022, possiblement liée à une dette immunitaire post-COVID.
+
+#Tableau descriptif - Occitanie par classe d'âge 
+```{r tableau 1}
+grippe |>
+  filter(region == "Occitanie") |>
+  select(classe_age, 
+         taux_urgences,
+         taux_sos,
+         taux_hospit) |>
+  tbl_summary(
+    by = classe_age,
+    statistic = all_continuous() ~ "{median} ({p25},{p75})",
+    label = list(
+      taux_urgences ~ "Passages urgences", 
+      taux_sos ~ "Actes SOS Médecine"
+    ), 
+    missing = "no"
+  )
+```
+
+# Conclusion
+
+Ce rapport illustre la surveillance de la grippe saisonnière à partir des données ouvertes Odissé. Les principaux constats sont :
+
+- Un **rythme saisonnier régulier** avec des pics hivernaux dans toutes les régions
+- Un **impact différentiel par âge** : les jeunes enfants (00-04 ans) consultent davantage aux urgences, tandis que les personnes âgées (65+) sont plus hospitalisées
+- Une **interruption nette en 2020-2021** liée aux mesures barrières COVID-19, suivie d'un rebond en 2022-2023
+
+*Rapport produit dans R avec tidyverse, ggplot2 et gtsummary.*

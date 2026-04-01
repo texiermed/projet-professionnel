@@ -258,6 +258,22 @@ filter(patients, age > 60)
 ```
 Le pipe envoie ce qui est à gauche comme **premier argument** de la fonction à droite.
 
+### %in% — vérifier si une valeur est dans une liste
+```r
+# Garder seulement 3 régions
+donnees |>
+  filter(Région %in% c("Occitanie", "Bretagne", "Corse"))
+
+# Exclure les DOM-TOM (! = "pas dans")
+donnees |>
+  filter(!Région %in% c("Guadeloupe", "Martinique", "Guyane", "Réunion", "Mayotte"))
+```
+- `%in%` → "est contenu dans la liste"
+- `!` devant → inverse le test ("n'est PAS dans la liste")
+- Raccourci pour éviter de répéter plein de `==` et `&` :
+  - Sans `%in%` : `filter(Région == "Occitanie" | Région == "Bretagne" | Région == "Corse")`
+  - Avec `%in%` : `filter(Région %in% c("Occitanie", "Bretagne", "Corse"))`
+
 ### group_by() + summarise()
 Calculer des statistiques **par groupe** :
 ```r
@@ -474,7 +490,7 @@ mon-projet/
   output/                 # résultats (tableaux, figures, rapports)
 ```
 
-**Utiliser ****`here::here()`**** pour les chemins :**
+**Utiliser \****`here::here()`**\*\* pour les chemins :**
 ```r
 # install.packages("here")
 library(here)
@@ -547,6 +563,35 @@ ggplot(patients, aes(x = age, y = dfg, color = risque_pr)) +
   geom_point(size = 3) +
   scale_color_manual(values = c("vert" = "green3", "orange" = "orange", "rouge" = "red3"))
 ```
+
+#### Line chart — évolution dans le temps (courbe épidémique)
+```r
+# Courbe simple (une seule série)
+france |>
+  ggplot(aes(x = date, y = taux_urgences)) +
+  geom_line() +
+  labs(title = "Passages aux urgences pour grippe — France",
+       x = "Date", y = "Taux pour 100 000")
+
+# Plusieurs lignes colorées (une par groupe)
+national |>
+  ggplot(aes(x = date, y = taux, color = Région)) +
+  geom_line() +
+  theme(legend.position = "bottom")
+```
+- `geom_line()` : relie les points par une ligne — idéal pour les séries temporelles
+- `color = Variable` dans `aes()` → une ligne par groupe, chaque couleur = un groupe
+- `color = "steelblue"` dans `geom_line()` (avec guillemets) → couleur fixe pour toutes les lignes
+- C'est LE graphique de base en **surveillance épidémiologique** (courbes de grippe, COVID, etc.)
+- Nécessite que la colonne X soit au format Date (voir `as.Date()` ci-dessous ou section 9. lubridate)
+
+> **Convertir du texte en date (sans lubridate) :**
+> ```r
+> # as.Date() — R de base, fonctionne quand le texte est au format "2024-12-02" (année-mois-jour)
+> donnees <- donnees |>
+>   mutate(date = as.Date(colonne_texte))
+> ```
+> Si le format est différent (ex: "02/12/2024"), utiliser lubridate : `dmy("02/12/2024")` (section 9)
 
 ### Graphiques avancés
 
@@ -679,6 +724,7 @@ ggplot(donnees, aes(x = fct_reorder(departement, taux), y = taux)) +
 | Barplot | Effectifs d'une variable catégorielle |
 | Barplot proportionnel | Comparer des proportions entre groupes de tailles différentes |
 | Scatter | Relation entre 2 variables continues |
+| **Line chart** | **Évolution dans le temps (courbe épidémique, surveillance)** |
 | Facettes | Éclater n'importe quel graphique par sous-groupe |
 
 ---
@@ -2564,7 +2610,7 @@ Toute étude publiée doit inclure un **diagramme de flux** (Figure 1) montrant 
 
 Structure type :
 ```
-Patients éligibles (N = ...)
+filPatients éligibles (N = ...)
   → Exclus (n = ...) : refus, critères non remplis
   → Inclus (n = ...)
     → Données complètes (n = ...)

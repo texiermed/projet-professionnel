@@ -188,16 +188,33 @@
   - GitHub lié dans les coordonnées
   - Pages suivies : OMS, EHESP, Santé Publique France, ARS Occitanie, SFSP
   - 2 mails envoyés : DD31 Toulouse + DD09 Ariège (demande d'échange avec un médecin ARS)
+  - Réponse DD09 : pas de médecin en Ariège, mail transféré à ARS Occitanie régionale
   - **CHECKPOINT 1 VALIDÉ** (technique + réseau)
+
+- 2026-04-01 : Session 14 — Réseau SP + début Checkpoint 2
+  - État des lieux complet des débouchés (ARS, CPAM, MDPH, HAS, SpFrance, MISP)
+  - Réseau LinkedIn activé : 3 médecins SP contactés (Alice Vabre, Léonie Langanay, Rodney Plat)
+  - Connexions pertinentes : Quentin Gicquel MD (SP, Paris-Sud), Aymeric Monégier du Sorbier (interne SP, M2 épidémio), Marie Pouquet (senior epidemiologist)
+  - Contact Facebook : Léo Delbos (ami interne SP à Paris, ok pour discuter)
+  - Dossier projet nettoyé (19 fichiers supprimés : photos, HTML, brouillons)
+  - Dataset grippe Odissé chargé dans R (29 250 lignes, 8 colonnes, données OSCOUR 2020-2026)
+  - Exploration : `count()` par région (18) et classe d'âge (5), `summary()`, ~890 NA identifiés
+  - `as.Date()` pour convertir texte → date, `%in%` pour filtrer/exclure des listes
+  - 4 graphiques produits :
+    1. Courbe épidémique Occitanie (geom_line)
+    2. Courbe moyenne nationale (group_by + summarise + mean)
+    3. 18 régions superposées (color = Région, avec/sans DOM-TOM)
+    4. Facettes par région métropole (facet_wrap + theme personnalisé)
+  - Erreurs corrigées : guillemets dans aes() (texte vs colonne), "France entière" inexistant, hjust compris
+  - Livret R mis à jour : geom_line, as.Date, %in%, table "quel graphique"
 
 ## Prochain checkpoint
 **Checkpoint 2 — Premier projet données ouvertes :**
-- [ ] Télécharger un dataset Géodes (grippe saisonnière OU diabète par département)
-- [ ] Nettoyer, analyser, visualiser dans R
+- [x] Télécharger un dataset Géodes grippe saisonnière ✅ (Odissé, passages urgences + SOS Médecins, régional)
+- [ ] Nettoyer, analyser, visualiser dans R — **EN COURS** (4 graphiques faits, reste : Tableau 1 gtsummary, nettoyage NA, analyses par âge)
 - [ ] Produire un rapport R Markdown complet
 - [ ] Pousser le projet sur GitHub (premier projet visible)
-- [ ] Contacter 1 nouveau médecin ARS ou SP via LinkedIn
-- [ ] Relancer les contacts Checkpoint 1 si réponse reçue
+- [x] Contacter 1+ médecin SP via LinkedIn ✅ (3 contactés + 1 ami SP)
 
 ## Points forts identifiés
 - Formation médicale solide (raisonnement, rigueur, lecture d'articles)
@@ -208,7 +225,7 @@
 - Livret R de haute qualité comme outil de révision
 
 ## Points à travailler
-- Réseau SP : premiers contacts pris (2 mails ARS envoyés, LinkedIn actif)
+- Réseau SP : en construction (2 mails ARS + 3 messages LinkedIn SP + 1 ami interne SP)
 - Git/GitHub : bases acquises, approfondir avec Learn Git Branching
 - Culture SP institutionnelle : à renforcer (checkpoint 3)
 - Gestion de l'énergie (adapter le rythme aux symptômes)
